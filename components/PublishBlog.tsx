@@ -1,5 +1,6 @@
 'use client'
 
+import { apiFetch } from '@/lib/api'
 import { useState } from 'react'
 
 export default function PublishBlog({ refreshPosts }: { refreshPosts: () => void }) {
@@ -9,13 +10,12 @@ export default function PublishBlog({ refreshPosts }: { refreshPosts: () => void
     console.log('title:', title)
     console.log('content:', content)
     if (title.trim() && content.trim()) {
-      await fetch('http://localhost:8082/api/posts', {
+      await apiFetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({
           title: title,
-          content: content,
-          authorId: 1,
-        }),
+          body: content
+        })
       })
       refreshPosts()
       setTitle('')

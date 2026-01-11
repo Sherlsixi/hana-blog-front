@@ -3,6 +3,9 @@ import styles from './page.module.css'
 import PublishBlog from '@/components/PublishBlog'
 import BlogList from '@/components/BlogList'
 import { useEffect, useState } from 'react'
+import { apiFetch, clearToken } from '@/lib/api'
+import { redirect } from 'next/navigation'
+import BlogDetail from '@/components/BlogDetail'
 
 export interface User {
   id: number
@@ -13,34 +16,35 @@ export interface User {
 export interface Post {
   id: number
   title: string
-  content: string
+  body: string
   published: boolean
   authorId: number
   author: User
 }
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([])
+  const postId = '6'
   async function refreshPosts() {
-    const res = await fetch('http://localhost:8082/api/posts', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer 3|rcYaHBpbGMnM3yiP4LYN4nt1dAgVr0MFZoggjMSnfc7c56ca',
-      },
-    }).then(res => res.json())
+    const res = await apiFetch('/api/posts').then((res) => res.json())
     const data: Post[] = await res.data
-    console.log('get data:', data)
     setPosts(data)
   }
   useEffect(() => {
     refreshPosts()
   }, [])
+
+  function handleLogout() {
+    clearToken()
+    redirect('/login')
+  }
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <button onClick={() => handleLogout()}>Logout</button>
         <h1 style={{ margin: '0 auto' }}>Welcome to HanaBlog</h1>
         <PublishBlog refreshPosts={refreshPosts} />
         <BlogList posts={posts} />
+        {/* <BlogDetail postId={postId} /> */}
       </main>
     </div>
   )

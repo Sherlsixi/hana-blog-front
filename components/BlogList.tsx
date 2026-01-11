@@ -10,7 +10,6 @@ export default function BlogList({ posts }: { posts: Post[] }) {
             <Link href={`/user/${post.authorId}`}>{post?.author.name}</Link>
             <Link href={`/posts/${post.id}`}>
               <h1>{post?.title}</h1>
-              <p>{post?.content}</p>
             </Link>
           </div>
         ))}
