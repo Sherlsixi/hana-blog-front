@@ -28,11 +28,12 @@ export default function Login() {
       .then((res) => res.json())
       .then((data) => {
         console.log('data:', data)
-        setToken(data.token)
-        // redirect('/')
-      })
-      .finally(() => {
-        redirect('/')
+        if (data.token) {
+          setToken(data.token)
+          redirect('/')
+        } else {
+          alert('Login failed')
+        }
       })
   }
 

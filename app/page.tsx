@@ -5,7 +5,6 @@ import BlogList from '@/components/BlogList'
 import { useEffect, useState } from 'react'
 import { apiFetch, clearToken } from '@/lib/api'
 import { redirect } from 'next/navigation'
-import BlogDetail from '@/components/BlogDetail'
 
 export interface User {
   id: number
@@ -23,7 +22,6 @@ export interface Post {
 }
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([])
-  const postId = '6'
   async function refreshPosts() {
     const res = await apiFetch('/api/posts').then((res) => res.json())
     const data: Post[] = await res.data
@@ -33,9 +31,16 @@ export default function Home() {
     refreshPosts()
   }, [])
 
-  function handleLogout() {
-    clearToken()
-    redirect('/login')
+  async function handleLogout() {
+    const res = await apiFetch('/api/logout', {
+      method: 'POST'
+    })
+    if (res.ok) {
+      clearToken()
+      redirect('/login')
+    } else {
+      alert('Logout failed')
+    }
   }
   return (
     <div className={styles.page}>
@@ -44,7 +49,6 @@ export default function Home() {
         <h1 style={{ margin: '0 auto' }}>Welcome to HanaBlog</h1>
         <PublishBlog refreshPosts={refreshPosts} />
         <BlogList posts={posts} />
-        {/* <BlogDetail postId={postId} /> */}
       </main>
     </div>
   )
