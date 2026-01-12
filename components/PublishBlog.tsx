@@ -7,8 +7,6 @@ export default function PublishBlog({ refreshPosts }: { refreshPosts: () => void
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   async function handleSubmit() {
-    console.log('title:', title)
-    console.log('content:', content)
     if (title.trim() && content.trim()) {
       await apiFetch('/api/posts', {
         method: 'POST',

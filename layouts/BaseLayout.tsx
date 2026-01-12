@@ -41,7 +41,7 @@ const items: MenuProps['items'] = [
   {
     key: 'user',
     icon: <UserOutlined />,
-    label: <Link href="/myposts">My Posts</Link>
+    label: <Link href="/mypage">My Page</Link>
   },
   {
     key: 'upload',

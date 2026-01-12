@@ -1,12 +1,12 @@
-import BlogDetail from '@/components/BlogDetail'
+import PostDetail from '@/components/PostDetail'
 import BaseLayout from '@/layouts/BaseLayout'
 
-export default async function PostDetail({ params }: { params: Promise<{ postId: string }> }) {
+export default async function Post({ params }: { params: Promise<{ postId: string }> }) {
   const { postId } = await params
 
   return (
     <BaseLayout>
-      <BlogDetail postId={postId} />
+      <PostDetail postId={postId} />
     </BaseLayout>
   )
 }

@@ -1,10 +1,10 @@
-import { UserPosts } from '@/components/UserPosts'
+import { MyPagePosts } from '@/components/MyPagePosts'
 import BaseLayout from '@/layouts/BaseLayout'
 
 export default async function MyPosts() {
   return (
     <BaseLayout>
-      <UserPosts />
+      <MyPagePosts />
     </BaseLayout>
   )
 }

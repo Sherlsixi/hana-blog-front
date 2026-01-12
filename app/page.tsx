@@ -1,7 +1,6 @@
 'use client'
-import styles from './page.module.css'
 import PublishBlog from '@/components/PublishBlog'
-import BlogList from '@/components/BlogList'
+import PostList from '@/components/PostList'
 import { useEffect, useState } from 'react'
 import { apiFetch } from '@/lib/api'
 import BaseLayout from '@/layouts/BaseLayout'
@@ -34,7 +33,7 @@ export default function Home() {
   return (
     <BaseLayout>
       <PublishBlog refreshPosts={refreshPosts} />
-      <BlogList posts={posts} />
+      <PostList posts={posts} />
     </BaseLayout>
   )
 }
