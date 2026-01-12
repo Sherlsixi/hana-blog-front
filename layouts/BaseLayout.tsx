@@ -68,7 +68,7 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
     <Layout hasSider>
       <Sider style={siderStyle}>
         <Link href="/">
-          <Image src="/logo.png" alt="logo" width={100} height={100} />
+          <Image src="/logo.png" alt="logo" width={100} height={100} loading="eager" />
         </Link>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
       </Sider>

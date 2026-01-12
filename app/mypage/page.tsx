@@ -10,7 +10,7 @@ export default function MyPage() {
 
   async function getUser() {
     const res = await apiFetch('/api/user')
-    const user: User = await res.json()
+    const user: User = await res.json().then((res) => res.data)
     setUser(user)
   }
   useEffect(() => {
